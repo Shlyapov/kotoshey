@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КотоШей - Избранное</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #fefaf6;
+            color: #5d4037;
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #d7ccc8 0%, #bcaaa4 100%);
+            color: #5d4037;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(93, 64, 55, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .header-scrolled {
+            padding: 15px 0;
+            box-shadow: 0 6px 20px rgba(93, 64, 55, 0.15);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 36px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -1px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, #5d4037 0%, #f48fb1 50%, #5d4037 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(93, 64, 55, 0.1);
+            padding: 5px 0;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(93, 64, 55, 0.15);
+        }
+        
+        .logo:hover::before {
+            transform: scaleX(1);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        nav ul li a {
+            color: #5d4037;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 12px 30px;
+            border-radius: 30px;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+        
+        .home-btn, .products-btn, .cart-btn {
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.3);
+            border: 1px solid #f48fb1;
+        }
+        
+        .home-btn:hover, .products-btn:hover, .cart-btn:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 143, 177, 0.4);
+        }
+        
+        .cart-btn {
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f48fb1;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .cart-btn:hover .cart-count {
+            transform: scale(1.2);
+        }
+        
+        .favorites {
+            padding: 40px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .favorites-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 42px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .favorites-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+            border-radius: 3px;
+        }
+        
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .favorite-card {
+            background: #fefaf6;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e8d5cd;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .favorite-card:nth-child(1) { animation-delay: 0.1s; }
+        .favorite-card:nth-child(2) { animation-delay: 0.2s; }
+        .favorite-card:nth-child(3) { animation-delay: 0.3s; }
+        .favorite-card:nth-child(4) { animation-delay: 0.4s; }
+        .favorite-card:nth-child(5) { animation-delay: 0.5s; }
+        .favorite-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        .favorite-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(188, 170, 164, 0.2);
+        }
+        
+        .favorite-image {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f0eb;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .favorite-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .favorite-card:hover .favorite-image img {
+            transform: scale(1.05);
+        }
+        
+        .favorite-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #f48fb1;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .favorite-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-height: 0;
+        }
+        
+        .favorite-info h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #5d4037;
+            line-height: 1.3;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            word-break: break-word;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            min-height: 44px;
+        }
+        
+        .favorite-description {
+            color: #8d6e63;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            flex-grow: 1;
+            font-weight: 400;
+            min-height: 40px;
+        }
+        
+        .favorite-price {
+            font-weight: 700;
+            color: #f48fb1;
+            font-size: 18px;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 24px;
+        }
+        
+        .favorite-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+        
+        .add-to-cart-btn {
+            flex: 1;
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            color: #5d4037;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #f48fb1;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(244, 143, 177, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-height: 42px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .add-to-cart-btn:hover::before {
+            left: 100%;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 143, 177, 0.4);
+        }
+        
+        .remove-btn {
+            background: linear-gradient(135deg, #ffcdd2 0%, #ef9a9a 100%);
+            color: #5d4037;
+            border: 1px solid #ef9a9a;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(239, 154, 154, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-width: 42px;
+            min-height: 42px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .remove-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .remove-btn:hover::before {
+            left: 100%;
+        }
+        
+        .remove-btn:hover {
+            background: linear-gradient(135deg, #ef9a9a 0%, #e57373 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 154, 154, 0.4);
+            color: white;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fefaf6;
+            border-radius: 15px;
+            border: 1px solid #e8d5cd;
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.1);
+            grid-column: 1 / -1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .empty-state h3 {
+            margin-bottom: 20px;
+            color: #5d4037;
+            font-size: 24px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .empty-state p {
+            color: #8d6e63;
+            margin-bottom: 30px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        .continue-shopping {
+            display: inline-block;
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            color: #5d4037;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(244, 143, 177, 0.3);
+            border: 1px solid #f48fb1;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .continue-shopping::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .continue-shopping:hover::before {
+            left: 100%;
+        }
+        
+        .continue-shopping:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(244, 143, 177, 0.4);
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: #f48fb1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 3px 12px rgba(244, 143, 177, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 99;
+        }
+        
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            background: #f06292;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 143, 177, 0.5);
+        }
+        
+        footer {
+            background: #d7ccc8;
+            color: #5d4037;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .footer-section:nth-child(1) { animation-delay: 0.1s; }
+        .footer-section:nth-child(2) { animation-delay: 0.2s; }
+        .footer-section:nth-child(3) { animation-delay: 0.3s; }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #8d6e63;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            line-height: 1.5;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #5d4037;
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid #bcaaa4;
+            padding-top: 20px;
+            color: #8d6e63;
+            font-weight: 400;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1001;
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            max-width: 280px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .favorites-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .favorite-image {
+                height: 180px;
+            }
+            
+            .favorite-info {
+                padding: 15px;
+            }
+            
+            .favorite-info h3 {
+                font-size: 16px;
+                min-height: 40px;
+            }
+            
+            .favorite-description {
+                font-size: 13px;
+                min-height: 36px;
+            }
+            
+            .favorite-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .add-to-cart-btn, .remove-btn {
+                width: 100%;
+                min-height: 40px;
+                font-size: 13px;
+            }
+            
+            .favorites-title {
+                font-size: 32px;
+            }
+            
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">КотоШей</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html" class="home-btn"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="products.html" class="products-btn"><i class="fas fa-gift"></i> Товары</a></li>
+                        <li><a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Корзина <span class="cart-count" id="cart-count">0</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="favorites">
+        <div class="container">
+            <h2 class="favorites-title">Избранное</h2>
+            
+            <div id="favorites-content">
+                <!-- Содержимое избранного будет загружено динамически -->
+            </div>
+        </div>
+    </section>
+    
+    <div class="scroll-to-top" id="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    
+    <div class="notification" id="notification">
+        Товар успешно добавлен в корзину!
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Псков, ул. Игрушечная, д. 16</p>
+                    <p><i class="fas fa-phone"></i> +7 999 999 99 99</p>
+                    <p><i class="fas fa-envelope"></i> info@kotoshey.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Часы работы</h3>
+                    <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 - 21:00</p>
+                    <p><i class="fas fa-clock"></i> Сб-Вс: 10:00 - 20:00</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Полезные ссылки</h3>
+                    <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+                    <a href="products.html"><i class="fas fa-gift"></i> Товары</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Корзина</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 "КотоШей". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Функция для обновления счетчика корзины
+        function updateCartCount() {
+            const savedToys = JSON.parse(localStorage.getItem('savedToys')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = savedToys.length;
+        }
+
+        // Функция для загрузки избранного
+        function loadFavorites() {
+            const favoritesContent = document.getElementById('favorites-content');
+            const favoriteToys = JSON.parse(localStorage.getItem('favoriteToys')) || [];
+            
+            if (favoriteToys.length === 0) {
+                favoritesContent.innerHTML = `
+                    <div class="empty-state">
+                        <h3>В избранном пока ничего нет</h3>
+                        <p>Добавляйте понравившиеся товары в избранное, чтобы не потерять их!</p>
+                        <a href="products.html" class="continue-shopping" style="margin-top: 20px;"><i class="fas fa-gift"></i> Перейти к товарам</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            let itemsHTML = '';
+            
+            favoriteToys.forEach((toy, index) => {
+                const price = toy.price || toy.basePrice || 0;
+                
+                itemsHTML += `
+                    <div class="favorite-card">
+                        <div class="favorite-image">
+                            <img src="${toy.image}" alt="${toy.name}">
+                            ${toy.badge ? `<div class="favorite-badge">${toy.badge}</div>` : ''}
+                        </div>
+                        <div class="favorite-info">
+                            <h3>${toy.name}</h3>
+                            <p class="favorite-description">${toy.description}</p>
+                            <div class="favorite-price">${price} руб.</div>
+                            <div class="favorite-actions">
+                                <button class="add-to-cart-btn" onclick="addToCartFromFavorites(${index})">
+                                    <i class="fas fa-cart-plus"></i> В корзину
+                                </button>
+                                <button class="remove-btn" onclick="removeFromFavorites(${index})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            favoritesContent.innerHTML = `
+                <div class="favorites-grid">
+                    ${itemsHTML}
+                </div>
+            `;
+        }
+        
+        // Функция для добавления в корзину из избранного
+        function addToCartFromFavorites(index) {
+            const favoriteToys = JSON.parse(localStorage.getItem('favoriteToys')) || [];
+            const toy = favoriteToys[index];
+            
+            if (toy) {
+                const savedToys = JSON.parse(localStorage.getItem('savedToys')) || [];
+                const existingToyIndex = savedToys.findIndex(item => item.originalId === toy.id);
+                
+                if (existingToyIndex !== -1) {
+                    savedToys[existingToyIndex].quantity += 1;
+                } else {
+                    const price = toy.price || toy.basePrice || 0;
+                    
+                    savedToys.push({
+                        id: toy.id + '-' + Date.now(),
+                        originalId: toy.id,
+                        category: toy.category,
+                        name: toy.name,
+                        size: "25 см",
+                        sizePrice: 0,
+                        filling: "Стандартный пух",
+                        fillingPrice: 0,
+                        scent: "none",
+                        scentPrice: 0,
+                        price: price,
+                        image: toy.image,
+                        description: toy.description,
+                        quantity: 1,
+                        timestamp: new Date().toISOString()
+                    });
+                }
+                
+                localStorage.setItem('savedToys', JSON.stringify(savedToys));
+                updateCartCount();
+                showNotification('Товар добавлен в корзину!');
+            }
+        }
+        
+        // Функция для удаления из избранного
+        function removeFromFavorites(index) {
+            const favoriteToys = JSON.parse(localStorage.getItem('favoriteToys')) || [];
+            favoriteToys.splice(index, 1);
+            localStorage.setItem('favoriteToys', JSON.stringify(favoriteToys));
+            loadFavorites();
+        }
+        
+        // Функция для показа уведомления
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            
+            if (isError) {
+                notification.classList.add('error');
+            } else {
+                notification.classList.remove('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Инициализация кнопки "Наверх"
+        function initScrollToTop() {
+            const scrollButton = document.getElementById('scroll-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollButton.classList.add('show');
+                } else {
+                    scrollButton.classList.remove('show');
+                }
+            });
+            
+            scrollButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Инициализация эффекта прокрутки для заголовка
+        function initScrollHeader() {
+            const header = document.getElementById('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header_scrolled');
+                }
+            });
+        }
+        
+        // Инициализация при загрузке страницы
+        function initPage() {
+            loadFavorites();
+            updateCartCount();
+            initScrollToTop();
+            initScrollHeader();
+        }
+        
+        window.onload = initPage;
+    </script>
+</body>
+</html>

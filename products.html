@@ -1,0 +1,2967 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КотоШей - Игрушки в наличии</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #fefaf6;
+            color: #5d4037;
+            line-height: 1.6;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #d7ccc8 0%, #bcaaa4 100%);
+            color: #5d4037;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(93, 64, 55, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .header-scrolled {
+            padding: 15px 0;
+            box-shadow: 0 6px 20px rgba(93, 64, 55, 0.15);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Стильное название магазина */
+        .logo {
+            font-size: 36px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -1px;
+            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, #5d4037 0%, #f48fb1 50%, #5d4037 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(93, 64, 55, 0.1);
+            padding: 5px 0;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+            border-radius: 3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(93, 64, 55, 0.15);
+        }
+        
+        .logo:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .logo span {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .logo span::after {
+            content: '🐾';
+            position: absolute;
+            top: -5px;
+            right: -25px;
+            font-size: 20px;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-5px);
+            }
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        nav ul li a {
+            color: #5d4037;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 12px 30px;
+            border-radius: 30px;
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        nav ul li a:hover::before {
+            left: 100%;
+        }
+        
+        .home-btn, .cart-btn, .favorites-btn {
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.3);
+            border: 1px solid #f48fb1;
+        }
+        
+        .home-btn:hover, .cart-btn:hover, .favorites-btn:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 143, 177, 0.4);
+        }
+        
+        .cart-btn, .favorites-btn {
+            position: relative;
+        }
+        
+        .cart-count, .favorites-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f48fb1;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .cart-btn:hover .cart-count, .favorites-btn:hover .favorites-count {
+            transform: scale(1.2);
+        }
+        
+        .toys {
+            padding: 40px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .toys-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 42px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .toys-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+            border-radius: 3px;
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .category-btn {
+            padding: 12px 25px;
+            border: 2px solid #e8d5cd;
+            border-radius: 30px;
+            background: white;
+            color: #5d4037;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(244, 143, 177, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .category-btn:hover::before {
+            left: 100%;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #f48fb1;
+            color: white;
+            border-color: #f48fb1;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.3);
+        }
+        
+        .toys-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .toy-card {
+            background: #fefaf6;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e8d5cd;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .toy-card:nth-child(1) { animation-delay: 0.1s; }
+        .toy-card:nth-child(2) { animation-delay: 0.2s; }
+        .toy-card:nth-child(3) { animation-delay: 0.3s; }
+        .toy-card:nth-child(4) { animation-delay: 0.4s; }
+        .toy-card:nth-child(5) { animation-delay: 0.5s; }
+        .toy-card:nth-child(6) { animation-delay: 0.6s; }
+        
+        .toy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(188, 170, 164, 0.2);
+        }
+        
+        .toy-image {
+            height: 250px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f0eb;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .toy-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .toy-card:hover .toy-image img {
+            transform: scale(1.05);
+        }
+        
+        .toy-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #f48fb1;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2;
+            color: #8d6e63;
+            font-size: 18px;
+        }
+        
+        .favorite-btn:hover {
+            background: white;
+            transform: scale(1.1);
+            color: #f48fb1;
+        }
+        
+        .favorite-btn.active {
+            background: #f48fb1;
+            color: white;
+        }
+        
+        .toy-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-height: 0;
+        }
+        
+        .toy-info h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #5d4037;
+            line-height: 1.3;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            word-break: break-word;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            min-height: 48px;
+        }
+        
+        .toy-description {
+            color: #8d6e63;
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.5;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            flex-grow: 1;
+            font-weight: 400;
+            min-height: 67.5px;
+        }
+        
+        .toy-price {
+            font-weight: 700;
+            color: #f48fb1;
+            font-size: 18px;
+            margin-bottom: 15px;
+            flex-shrink: 0;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 27px;
+        }
+        
+        .view-details-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            color: #5d4037;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.4);
+            border: 1px solid #f48fb1;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            flex-shrink: 0;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .view-details-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .view-details-btn:hover::before {
+            left: 100%;
+        }
+        
+        .view-details-btn:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 143, 177, 0.6);
+        }
+        
+        /* Модальное окно товара */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background-color: #fefaf6;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #8d6e63;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            color: #5d4037;
+            transform: scale(1.1) rotate(90deg);
+            background: rgba(188, 170, 164, 0.2);
+        }
+        
+        .product-details {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.2);
+        }
+        
+        .product-image img {
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.03);
+        }
+        
+        .product-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .product-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #5d4037;
+            line-height: 1.3;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .product-description {
+            color: #8d6e63;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        .product-base-price {
+            font-size: 20px;
+            color: #8d6e63;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+        
+        .product-base-price span {
+            font-weight: bold;
+            color: #f48fb1;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .options-section {
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .options-section:nth-child(1) { animation-delay: 0.1s; }
+        .options-section:nth-child(2) { animation-delay: 0.2s; }
+        .options-section:nth-child(3) { animation-delay: 0.3s; }
+        .options-section:nth-child(4) { animation-delay: 0.4s; }
+        .options-section:nth-child(5) { animation-delay: 0.5s; }
+        
+        .options-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #5d4037;
+            border-bottom: 2px solid #e8d5cd;
+            padding-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .options-title i {
+            margin-right: 10px;
+            color: #f48fb1;
+        }
+        
+        .options-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .option {
+            flex: 1;
+            min-width: 100px;
+            padding: 12px;
+            border: 2px solid #e8d5cd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(244, 143, 177, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .option:hover::before {
+            left: 100%;
+        }
+        
+        .option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 3px 10px rgba(188, 170, 164, 0.2);
+        }
+        
+        .option.active {
+            border-color: #f48fb1;
+            background: #fef0f5;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 143, 177, 0.2);
+        }
+        
+        .option-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-align: center;
+            line-height: 1.3;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+        }
+        
+        .option-price {
+            font-size: 12px;
+            color: #8d6e63;
+            text-align: center;
+            line-height: 1.3;
+            font-weight: 500;
+        }
+        
+        .option-description {
+            font-size: 10px;
+            color: #a1887f;
+            margin-top: 5px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        /* Обновленные стили для персонализации */
+        .personalization-option {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 2px solid #e8d5cd;
+            border-radius: 10px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .personalization-option:hover {
+            border-color: #f48fb1;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(244, 143, 177, 0.1);
+        }
+        
+        .personalization-option.active {
+            border-color: #f48fb1;
+            background: #fef0f5;
+        }
+        
+        .personalization-checkbox {
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+        
+        .personalization-content {
+            flex: 1;
+        }
+        
+        .personalization-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .personalization-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .personalization-price {
+            font-weight: 600;
+            color: #f48fb1;
+            font-size: 14px;
+        }
+        
+        .personalization-description {
+            font-size: 14px;
+            color: #8d6e63;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .personalization-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e8d5cd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-top: 5px;
+        }
+        
+        .personalization-input:focus {
+            border-color: #f48fb1;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(244, 143, 177, 0.2);
+        }
+        
+        .personalization-input::placeholder {
+            color: #a1887f;
+            font-size: 13px;
+        }
+        
+        .product-summary {
+            background: #f5f0eb;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease 0.6s forwards;
+        }
+
+        .product-summary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.2);
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .summary-row:hover {
+            color: #5d4037;
+            transform: translateX(5px);
+        }
+        
+        .summary-row span {
+            word-break: break-word;
+        }
+        
+        .final-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5d4037;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #e8d5cd;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .final-price span {
+            color: #f48fb1;
+        }
+        
+        .add-to-cart-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            color: #5d4037;
+            padding: 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.4);
+            border: 1px solid #f48fb1;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 25px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease 0.7s forwards;
+        }
+        
+        .add-to-cart-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .add-to-cart-btn:hover::before {
+            left: 100%;
+        }
+        
+        .add-to-cart-btn:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 143, 177, 0.6);
+        }
+
+        /* Кнопка озвучки */
+        .voice-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+            color: #5d4037;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.4);
+            border: 1px solid #f48fb1;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            flex-shrink: 0;
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .voice-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .voice-btn:hover::before {
+            left: 100%;
+        }
+
+        .voice-btn:hover {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 143, 177, 0.6);
+        }
+
+        .voice-btn:hover::after {
+            content: "Можно добавить озвучку в игрушку - запишите свой голос или загрузите аудиофайл для создания уникальной игрушки с персонализированным звуком";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #5d4037;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 300px;
+            z-index: 1000;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .voice-btn.has-audio {
+            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+            color: white;
+        }
+
+        /* Модальное окно озвучки */
+        .voice-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .voice-modal.show {
+            opacity: 1;
+        }
+
+        .voice-modal-content {
+            background-color: #fefaf6;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .voice-modal.show .voice-modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .voice-close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: #8d6e63;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .voice-close-modal:hover {
+            color: #5d4037;
+            transform: scale(1.1) rotate(90deg);
+            background: rgba(188, 170, 164, 0.2);
+        }
+
+        .voice-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .voice-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .voice-option {
+            background: #f5f0eb;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e8d5cd;
+            transition: all 0.3s ease;
+        }
+
+        .voice-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.2);
+        }
+
+        .voice-option h3 {
+            margin-bottom: 15px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .voice-option h3 i {
+            margin-right: 10px;
+            color: #f48fb1;
+        }
+
+        .file-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #bcaaa4;
+            border-radius: 8px;
+            background: white;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .file-input:hover {
+            border-color: #f48fb1;
+            background: #fef0f5;
+        }
+
+        .record-btn, .stop-btn, .play-btn, .delete-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .record-btn i, .stop-btn i, .play-btn i, .delete-btn i {
+            margin-right: 5px;
+        }
+
+        .record-btn {
+            background: #f48fb1;
+            color: white;
+        }
+
+        .stop-btn {
+            background: #ff9800;
+            color: white;
+        }
+
+        .play-btn {
+            background: #4caf50;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .record-btn:hover, .stop-btn:hover, .play-btn:hover, .delete-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .audio-preview {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e8d5cd;
+            transition: all 0.3s ease;
+        }
+
+        .audio-preview:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.2);
+        }
+
+        .audio-preview h4 {
+            margin-bottom: 10px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .audio-player {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: #fefaf6;
+            border-radius: 15px;
+            border: 1px solid #e8d5cd;
+            box-shadow: 0 5px 15px rgba(188, 170, 164, 0.1);
+            grid-column: 1 / -1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .empty-state h3 {
+            margin-bottom: 20px;
+            color: #5d4037;
+            font-size: 24px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        .empty-state p {
+            color: #8d6e63;
+            margin-bottom: 30px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+        
+        /* Анимация загрузки */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Кнопка "Наверх" */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #f48fb1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(244, 143, 177, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 99;
+        }
+        
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            background: #f06292;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(244, 143, 177, 0.6);
+        }
+        
+        footer {
+            background: #d7ccc8;
+            color: #5d4037;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+        
+        .footer-section:nth-child(1) { animation-delay: 0.1s; }
+        .footer-section:nth-child(2) { animation-delay: 0.2s; }
+        .footer-section:nth-child(3) { animation-delay: 0.3s; }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: #5d4037;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #8d6e63;
+            text-decoration: none;
+            margin-bottom: 10px;
+            display: block;
+            line-height: 1.5;
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: #5d4037;
+            transform: translateX(5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid #bcaaa4;
+            padding-top: 20px;
+            color: #8d6e63;
+            font-weight: 400;
+        }
+        
+        /* Уведомление */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+            transform: translateX(150%);
+            transition: transform 0.4s ease;
+            max-width: 300px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                font-size: 28px;
+            }
+            
+            .logo span::after {
+                right: -20px;
+                font-size: 16px;
+            }
+            
+            .toys-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .product-details {
+                flex-direction: column;
+            }
+            
+            .modal-content {
+                padding: 20px;
+                margin: 20px auto;
+            }
+            
+            .options-group {
+                flex-direction: column;
+            }
+            
+            .option {
+                min-width: 100%;
+            }
+            
+            .toys-title {
+                font-size: 32px;
+            }
+
+            .voice-btn:hover::after {
+                width: 250px;
+                font-size: 12px;
+            }
+            
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .toy-info h3 {
+                min-height: 42px;
+                font-size: 18px;
+            }
+            
+            .toy-description {
+                min-height: 60px;
+                font-size: 14px;
+            }
+            
+            .personalization-option {
+                flex-direction: column;
+            }
+            
+            .personalization-checkbox {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Игрушки в наличии -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">КотоШей</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html" class="home-btn"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="favorites.html" class="favorites-btn"><i class="fas fa-heart"></i> Избранное <span class="favorites-count" id="favorites-count">0</span></a></li>
+                        <li><a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Корзина <span class="cart-count" id="cart-count">0</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="toys">
+        <div class="container">
+            <h2 class="toys-title">Игрушки в наличии</h2>
+            
+            <div class="category-filter" id="category-filter">
+                <button class="category-btn active" data-category="all">Все игрушки</button>
+                <button class="category-btn" data-category="bunnies">Зайчики</button>
+                <button class="category-btn" data-category="bears">Мишки</button>
+                <button class="category-btn" data-category="unicorns">Единороги</button>
+                <button class="category-btn" data-category="other">Другие</button>
+                <button class="category-btn" data-category="keychains">Брелки</button>
+            </div>
+            
+            <div class="toys-grid" id="toys-grid">
+                <!-- Игрушки будут загружены динамически -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Модальное окно товара -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <div class="product-details" id="product-details">
+                <!-- Содержимое товара будет загружено динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно озвучки -->
+    <div class="voice-modal" id="voice-modal">
+        <div class="voice-modal-content">
+            <span class="voice-close-modal" id="voice-close-modal">&times;</span>
+            <h2 class="voice-title">Добавить озвучку в игрушку</h2>
+            <div class="voice-options">
+                <div class="voice-option">
+                    <h3><i class="fas fa-file-audio"></i> Загрузить аудиофайл</h3>
+                    <input type="file" class="file-input" id="audio-file" accept="audio/*">
+                    <p style="color: #8d6e63; font-size: 14px; margin-top: 10px;">Поддерживаемые форматы: MP3, WAV, OGG</p>
+                </div>
+                <div class="voice-option">
+                    <h3><i class="fas fa-microphone"></i> Записать голос</h3>
+                    <button class="record-btn" id="record-btn"><i class="fas fa-record-vinyl"></i> Начать запись</button>
+                    <button class="stop-btn" id="stop-btn" style="display: none;"><i class="fas fa-stop"></i> Остановить запись</button>
+                    <p style="color: #8d6e63; font-size: 14px; margin-top: 10px;">Нажмите "Начать запись" и говорите в микрофон</p>
+                </div>
+                <div class="audio-preview" id="audio-preview" style="display: none;">
+                    <h4>Предпросмотр аудио:</h4>
+                    <audio controls class="audio-player" id="audio-player"></audio>
+                    <div>
+                        <button class="play-btn" id="play-preview"><i class="fas fa-play"></i> Воспроизвести</button>
+                        <button class="delete-btn" id="delete-audio"><i class="fas fa-trash"></i> Удалить запись</button>
+                    </div>
+                </div>
+            </div>
+            <button class="add-to-cart-btn" id="save-voice"><i class="fas fa-save"></i> Сохранить озвучку (+300 руб.)</button>
+        </div>
+    </div>
+    
+    <!-- Кнопка "Наверх" -->
+    <div class="scroll-to-top" id="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+    
+    <!-- Уведомление -->
+    <div class="notification" id="notification">
+        Товар успешно добавлен в корзину!
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Псков, ул. Игрушечная, д. 16</p>
+                    <p><i class="fas fa-phone"></i> +7 999 999 99 99</p>
+                    <p><i class="fas fa-envelope"></i> info@kotoshey.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Часы работы</h3>
+                    <p><i class="fas fa-clock"></i> Пн-Пт: 9:00 - 21:00</p>
+                    <p><i class="fas fa-clock"></i> Сб-Вс: 10:00 - 20:00</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Полезные ссылки</h3>
+                    <a href="index.html"><i class="fas fa-home"></i> Главная</a>
+                    <a href="favorites.html"><i class="fas fa-heart"></i> Избранное</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> Корзина</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 "КотоШей". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные для игрушек в наличии
+        const toyData = {
+            bunnies: {
+                name: "Зайчики",
+                toys: [
+                    {
+                        id: "bunny1",
+                        name: "Бежевый зайчик",
+                        basePrice: 950,
+                        image: "images/бежевый зайчик.webp",
+                        description: "Нежный бежевый зайчик с длинными ушками. Идеальный подарок для детей всех возрастов. Мягкий и приятный на ощупь.",
+                        badge: "Хит"
+                    },
+                    {
+                        id: "bunny2",
+                        name: "Серый зайчик",
+                        basePrice: 990,
+                        image: "images/серый зайчик.webp",
+                        description: "Милый серый зайчик с бархатными ушками. Этот плюшевый друг станет верным спутником вашего ребенка.",
+                        badge: "Новинка"
+                    },
+                    {
+                        id: "bunny3",
+                        name: "Зайчик в фиолетовом платье",
+                        basePrice: 1100,
+                        image: "images/зайчик в фиолетовом платье.webp",
+                        description: "Зайчик в нарядном фиолетовом платьице с бантиком. Элегантная игрушка для маленьких принцесс."
+                    },
+                    {
+                        id: "bunny4",
+                        name: "Зайчик в розовом платье",
+                        basePrice: 1050,
+                        image: "images/зайчик в розовом платье.webp",
+                        description: "Нежный зайчик в розовом платье с длинными ушками. Идеальный компаньон для игр и сна."
+                    }
+                ]
+            },
+            bears: {
+                name: "Мишки",
+                toys: [
+                    {
+                        id: "bear1",
+                        name: "Мишка Тедди классический",
+                        basePrice: 1200,
+                        image: "images/мишка тедди классический.jpg",
+                        description: "Классический плюшевый мишка Тедди. Вечная классика, которая никогда не выходит из моды.",
+                        badge: "Хит"
+                    },
+                    {
+                        id: "bear2",
+                        name: "Вязанный мишка с бантом",
+                        basePrice: 1250,
+                        image: "images/вязанный мишка с бантом.jpg",
+                        description: "Очаровательный вязаный мишка с элегантным бантом. Нежный и уютный друг для вашего ребенка.",
+                        badge: "Новинка"
+                    },
+                    {
+                        id: "bear3",
+                        name: "Мягкий мишка",
+                        basePrice: 1150,
+                        image: "images/мягкий мишка.webp",
+                        description: "Мягкий мишка с голубым бантом. Нежный и пушистый, как настоящее облачко."
+                    },
+                    {
+                        id: "bear4",
+                        name: "Мишка коричневый",
+                        basePrice: 1300,
+                        image: "images/мишка коричневый.webp",
+                        description: "Коричневый мишка в теплом свитере. Стильный и уютный друг для холодных вечеров."
+                    },
+                    {
+                        id: "bear5",
+                        name: "Мишка Тедди с бантом",
+                        basePrice: 1100,
+                        image: "images/мишка тедди с бантом.jpg",
+                        description: "Классический мишка Тедди с бантом. Элегантный подарок для особых случаев."
+                    }
+                ]
+            },
+            unicorns: {
+                name: "Единороги",
+                toys: [
+                    {
+                        id: "unicorn1",
+                        name: "Вязаный единорог амигуруми",
+                        basePrice: 1250,
+                        image: "images/вязаный единорог амигуруми.webp",
+                        description: "Очаровательный вязаный единорог в технике амигуруми. Волшебный друг для сказочных приключений.",
+                        badge: "Хит"
+                    },
+                    {
+                        id: "unicorn2",
+                        name: "Розовый единорог",
+                        basePrice: 1200,
+                        image: "images/розовый единорог.webp",
+                        description: "Нежный розовый единорог с золотым рогом. Волшебная игрушка для мечтательных детей."
+                    },
+                    {
+                        id: "unicorn3",
+                        name: "Белый единорог",
+                        basePrice: 1300,
+                        image: "images/белый единорог.jpg",
+                        description: "Волшебный белый единорог с блестками. Сказочный друг для волшебных приключений."
+                    }
+                ]
+            },
+            other: {
+                name: "Другие",
+                toys: [
+                    {
+                        id: "other1",
+                        name: "Вязаный котик с шарфом",
+                        basePrice: 1050,
+                        image: "images/вязаный котик с шарфом.jpg",
+                        description: "Милый вязаный котик с розовым шарфом. Нежный и уютный, станет лучшим другом вашему ребенку.",
+                        badge: "Новинка"
+                    },
+                    {
+                        id: "other2",
+                        name: "Вязаная мышка в платье",
+                        basePrice: 980,
+                        image: "images/вязаная мышка в платье.jpg",
+                        description: "Очаровательная вязаная мышка в нарядном платье. Элегантная и милая игрушка для маленьких леди."
+                    },
+                    {
+                        id: "other3",
+                        name: "Зеленая змея",
+                        basePrice: 950,
+                        image: "images/зеленая змея.webp",
+                        description: "Милая плюшевая зеленая змея. Эта милая змейка не оставит равнодушным ни одного ребенка."
+                    },
+                    {
+                        id: "other4",
+                        name: "Синяя змея",
+                        basePrice: 1000,
+                        image: "images/синяя змея.webp",
+                        description: "Дружелюбная синяя змея. Верный друг для игр и приключений."
+                    },
+                    {
+                        id: "other5",
+                        name: "Кошечка сфинкс",
+                        basePrice: 1050,
+                        image: "images/кошечка сфинкс.webp",
+                        description: "Милая кошечка сфинкс с добрыми глазками. Храбрая, но добрый друг для вашего ребенка."
+                    },
+                    {
+                        id: "other6",
+                        name: "Белая собачка",
+                        basePrice: 1100,
+                        image: "images/белая собачка.webp",
+                        description: "Забавная белая собачка с большими ушами. Мягкий и дружелюбный, как настоящий пес."
+                    },
+                    {
+                        id: "other7",
+                        name: "Коричневая собачка",
+                        basePrice: 980,
+                        image: "images/коричневая собачка.webp",
+                        description: "Милая коричневая собачка в шарфике. Северный друг, который согреет своим теплом."
+                    },
+                    {
+                        id: "other8",
+                        name: "Милая змейка в шляпке",
+                        basePrice: 1020,
+                        image: "images/милая змейка в шляпке.webp",
+                        description: "Хитрая милая змейка в шляпке с пушистым хвостом. Умный и находчивый компаньон для игр."
+                    },
+                    {
+                        id: "other9",
+                        name: "Рыженькая девочка",
+                        basePrice: 900,
+                        image: "images/рыженькая девочка.webp",
+                        description: "Рыженькая девочка. Милая и забавная, несмотря на свои кудряшки - колючки."
+                    },
+                    {
+                        id: "other10",
+                        name: "Олененок серенький",
+                        basePrice: 1150,
+                        image: "images/олененок серенький.webp",
+                        description: "Добродушный олененок . Большой и мягкий друг для объятий."
+                    },
+                    {
+                        id: "other11",
+                        name: "Колобок",
+                        basePrice: 1200,
+                        image: "images/колобок.webp",
+                        description: "Милый колобок . Редкий и ценный друг из далеких краев."
+                    },
+                    {
+                        id: "other12",
+                        name: "Снеговичек",
+                        basePrice: 1100,
+                        image: "images/снеговичек.webp",
+                        description: "Милый снеговичек с добрыми глазками. Храбрый, но нежный защитник."
+                    },
+                    {
+                        id: "other13",
+                        name: "Олененок",
+                        basePrice: 1180,
+                        image: "images/олененок.webp",
+                        description: "Храбрый олененок. Будущий король леса уже в вашем доме."
+                    }
+                ]
+            },
+            keychains: {
+                name: "Брелки",
+                toys: [
+                    {
+                        id: "keychain1",
+                        name: "Крабик брелок",
+                        basePrice: 280,
+                        image: "images/крабик брелок.webp",
+                        description: "Крошечный крабик-брелок с колечком. Компактный друг всегда с вами.",
+                        badge: "Популярный"
+                    },
+                    {
+                        id: "keychain2",
+                        name: "Брелок кексик",
+                        basePrice: 300,
+                        image: "images/брелок кексик.jpg",
+                        description: "Сладкий кексик-брелок с милой глазурью. Вкусное украшение для ваших ключей."
+                    },
+                    {
+                        id: "keychain3",
+                        name: "Брелок пельмень",
+                        basePrice: 320,
+                        image: "images/брелок пельмень.jpg",
+                        description: "Забавный пельмень-брелок ручной работы. Уникальный аксессуар с домашним теплом."
+                    },
+                    {
+                        id: "keychain4",
+                        name: "Брелок сердечко",
+                        basePrice: 270,
+                        image: "images/брелок сердечко.jpg",
+                        description: "Нежное вязаное сердечко-брелок. Символ любви и заботы всегда с вами."
+                    }
+                ]
+            }
+        };
+
+        // Данные для опций
+        const sizeData = {
+            "25": { 
+                name: "25 см", 
+                multiplier: 1.0,
+                description: "Маленькая игрушка, идеальна для малышей"
+            },
+            "35": { 
+                name: "35 см", 
+                multiplier: 1.2,
+                description: "Средняя игрушка, удобна для объятий и игр"
+            },
+            "55": { 
+                name: "55 см", 
+                multiplier: 1.5,
+                description: "Большая игрушка, отлично подходит для подушек-обнимашек"
+            },
+            "85": { 
+                name: "85 см", 
+                multiplier: 2.0,
+                description: "Очень большая игрушка, ростом с маленького ребенка"
+            },
+            "115": { 
+                name: "115 см", 
+                multiplier: 2.5,
+                description: "Гигантская игрушка, для настоящих ценителей"
+            }
+        };
+
+        const fillingData = {
+            "synthetic": {
+                name: "Стандартный пух",
+                multiplier: 1.0,
+                description: "Мягкий и легкий, легко стирается"
+            },
+            "cotton": {
+                name: "Хлопок",
+                multiplier: 1.1,
+                description: "Натуральный материал, гипоаллергенный"
+            },
+            "bamboo": {
+                name: "Бамбуковое волокно",
+                multiplier: 1.2,
+                description: "Экологичный материал с антибактериальными свойствами"
+            },
+            "memory": {
+                name: "Memory foam",
+                multiplier: 1.3,
+                description: "Инновационный материал, принимает форму тела"
+            }
+        };
+
+        const scentData = {
+            "none": {
+                name: "Без аромата",
+                price: 0,
+                description: "Без дополнительной ароматизации"
+            },
+            "vanilla": {
+                name: "Ваниль",
+                price: 50,
+                description: "Нежный сладкий аромат ванили"
+            },
+            "lavender": {
+                name: "Лаванда",
+                price: 50,
+                description: "Успокаивающий аромат лаванды"
+            },
+            "chocolate": {
+                name: "Шоколад",
+                price: 70,
+                description: "Аппетитный аромат шоколада"
+            },
+            "strawberry": {
+                name: "Клубника",
+                price: 70,
+                description: "Свежий аромат спелой клубники"
+            }
+        };
+
+        // Обновленные данные для персонализации (только для не-брелоков)
+        const personalizationData = {
+            "none": {
+                name: "Без персонализации",
+                price: 0,
+                description: "Стандартная игрушка без надписей"
+            },
+            "name_paw": {
+                name: "Имя на лапке",
+                price: 150,
+                description: "Вышитое имя на лапке игрушки",
+                placeholder: "Введите имя (макс. 15 символов)",
+                maxLength: 15
+            },
+            "name_ear": {
+                name: "Имя на ушке",
+                price: 150,
+                description: "Вышитое имя на ушке игрушки",
+                placeholder: "Введите имя (макс. 12 символов)",
+                maxLength: 12
+            },
+            "message_tag": {
+                name: "Сообщение на бирке",
+                price: 200,
+                description: "Короткое сообщение на бирке игрушки",
+                placeholder: "Введите сообщение (макс. 30 символов)",
+                maxLength: 30
+            },
+            "date_paw": {
+                name: "Дата на лапке",
+                price: 100,
+                description: "Вышитая дата на лапке игрушки",
+                placeholder: "ДД.ММ.ГГГГ",
+                maxLength: 10
+            },
+            "special_message": {
+                name: "Особое пожелание",
+                price: 250,
+                description: "Персональное пожелание на отдельной бирке",
+                placeholder: "Введите пожелание (макс. 40 символов)",
+                maxLength: 40
+            }
+        };
+
+        // Данные для бирок (только для брелков) - с таким же интерфейсом как персонализация
+        const tagData = {
+            "none": {
+                name: "Без бирки",
+                price: 0,
+                description: "Стандартный брелок без дополнительной бирки"
+            },
+            "message_tag": {
+                name: "Сообщение на бирке",
+                price: 100,
+                description: "Короткое сообщение на бирке брелка",
+                placeholder: "Введите сообщение (макс. 25 символов)",
+                maxLength: 25
+            },
+            "name_tag": {
+                name: "Имя на бирке",
+                price: 80,
+                description: "Имя на бирке брелка",
+                placeholder: "Введите имя (макс. 15 символов)",
+                maxLength: 15
+            }
+        };
+
+        // Цена за озвучку
+        const VOICE_PRICE = 300;
+
+        // Текущий выбранный товар
+        let currentToy = null;
+        let selectedSize = "25";
+        let selectedFilling = "synthetic";
+        let selectedScent = "none";
+        let selectedPersonalizations = {}; // Объект для хранения выбранных персонализаций
+        let selectedTag = "none"; // Для брелков
+        let tagText = ""; // Текст для бирки брелка
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let currentAudioBlob = null;
+        
+        // Хранилище для озвучек (сохраняется в sessionStorage)
+        let toyVoices = JSON.parse(sessionStorage.getItem('toyVoices')) || {};
+
+        // Функция для обновления счетчика корзины
+        function updateCartCount() {
+            const savedToys = JSON.parse(localStorage.getItem('savedToys')) || [];
+            const cartCount = document.getElementById('cart-count');
+            cartCount.textContent = savedToys.length;
+        }
+
+        // Функция для обновления счетчика избранного
+        function updateFavoritesCount() {
+            const favoriteToys = JSON.parse(localStorage.getItem('favoriteToys')) || [];
+            const favoritesCount = document.getElementById('favorites-count');
+            favoritesCount.textContent = favoriteToys.length;
+        }
+
+        // Функция для загрузки игрушек
+        function loadToys(category = 'all') {
+            const toysGrid = document.getElementById('toys-grid');
+            toysGrid.innerHTML = '';
+            
+            let toysToShow = [];
+            
+            if (category === 'all') {
+                // Показать все игрушки
+                Object.keys(toyData).forEach(categoryKey => {
+                    toysToShow = toysToShow.concat(toyData[categoryKey].toys);
+                });
+            } else {
+                // Показать игрушки только выбранной категории
+                toysToShow = toyData[category].toys;
+            }
+            
+            if (toysToShow.length === 0) {
+                toysGrid.innerHTML = `
+                    <div class="empty-state">
+                        <h3>Игрушки не найдены</h3>
+                        <p>Попробуйте выбрать другую категорию</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Загружаем избранные игрушки
+            const favoriteToys = JSON.parse(localStorage.getItem('favoriteToys')) || [];
+            
+            toysToShow.forEach(toy => {
+                const isFavorite = favoriteToys.some(fav => fav.id === toy.id);
+                const toyCard = document.createElement('div');
+                toyCard.className = 'toy-card';
+                toyCard.innerHTML = `
+                    <div class="toy-image">
+                        <img src="${toy.image}" alt="${toy.name}" loading="lazy">
+                        ${toy.badge ? `<div class="toy-badge">${toy.badge}</div>` : ''}
+                        <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-id="${toy.id}">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="toy-info">
+                        <h3>${toy.name}</h3>
+                        <p class="toy-description">${toy.description}</p>
+                        <div class="toy-price">от ${toy.basePrice} руб.</div>
+                        <button class="view-details-btn" data-id="${toy.id}"><i class="fas fa-info-circle"></i> Подробнее</button>
+                    </div>
+                `;
+                
+                toysGrid.appendChild(toyCard);
+            });
+            
+            // Добавляем обработчики событий для кнопок избранного
+            document.querySelectorAll('.favorite-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const toyId = this.getAttribute('data-id');
+                    toggleFavorite(toyId, this);
+                });
+            });
+            
+            // Добавляем обработчики событий для кнопок просмотра деталей
+            document.querySelectorAll('.view-details-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const toyId = this.getAttribute('data-id');
+                    openProductModal(toyId);
+                });
+            });
+            
+            // Добавляем обработчики событий для карточек товаров
+            document.querySelectorAll('.toy-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const toyId = this.querySelector('.view-details-btn').getAttribute('data-id');
+                    openProductModal(toyId);
+                });
+            });
+        }
+
+        // Функция для добавления/удаления из избранного
+        function toggleFavorite(toyId, button) {
+            // Находим игрушку по ID
+            let toy = null;
+            Object.keys(toyData).forEach(categoryKey => {
+                toyData[categoryKey].toys.forEach(t => {
+                    if (t.id === toyId) {
+                        toy = t;
+                    }
+                });
+            });
+            
+            if (!toy) return;
+            
+            // Загружаем текущие избранные игрушки
+            const favoriteToys = JSON.parse(localStorage.getItem('favoriteToys')) || [];
+            
+            // Проверяем, есть ли уже эта игрушка в избранном
+            const existingIndex = favoriteToys.findIndex(fav => fav.id === toyId);
+            
+            if (existingIndex !== -1) {
+                // Удаляем из избранного
+                favoriteToys.splice(existingIndex, 1);
+                button.classList.remove('active');
+                showNotification('Игрушка удалена из избранного');
+            } else {
+                // Добавляем в избранное
+                favoriteToys.push({
+                    id: toy.id,
+                    name: toy.name,
+                    basePrice: toy.basePrice,
+                    image: toy.image,
+                    description: toy.description,
+                    category: getCategoryName(toy.id)
+                });
+                button.classList.add('active');
+                showNotification('Игрушка добавлена в избранное!');
+            }
+            
+            // Сохраняем обратно в localStorage
+            localStorage.setItem('favoriteToys', JSON.stringify(favoriteToys));
+            
+            // Обновляем счетчик избранного
+            updateFavoritesCount();
+        }
+
+        // Функция для получения доступных размеров для товара
+        function getAvailableSizes(toyId) {
+            // Для брелков доступен только размер 25 см
+            if (toyId.startsWith('keychain')) {
+                return {
+                    "25": sizeData["25"]
+                };
+            }
+            
+            // Для всех остальных игрушек доступны все размеры
+            return sizeData;
+        }
+
+        // Функция для открытия модального окна товара
+        function openProductModal(toyId) {
+            // Находим игрушку по ID
+            currentToy = null;
+            
+            Object.keys(toyData).forEach(categoryKey => {
+                toyData[categoryKey].toys.forEach(toy => {
+                    if (toy.id === toyId) {
+                        currentToy = toy;
+                    }
+                });
+            });
+            
+            if (!currentToy) {
+                showNotification('Ошибка: игрушка не найдена!', true);
+                return;
+            }
+            
+            // Получаем доступные размеры для этого товара
+            const availableSizes = getAvailableSizes(toyId);
+            
+            // Сбрасываем выбор опций
+            selectedSize = "25";
+            selectedFilling = "synthetic";
+            selectedScent = "none";
+            selectedPersonalizations = {};
+            selectedTag = "none";
+            tagText = "";
+            
+            // Проверяем, есть ли сохраненная озвучка для этой игрушки
+            const hasSavedVoice = toyVoices[currentToy.id];
+            
+            // Заполняем модальное окно данными товара
+            const productDetails = document.getElementById('product-details');
+            
+            // Определяем, является ли товар брелком
+            const isKeychain = toyId.startsWith('keychain');
+            
+            productDetails.innerHTML = `
+                <div class="product-image">
+                    <img src="${currentToy.image}" alt="${currentToy.name}">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">${currentToy.name}</h2>
+                    <p class="product-description">${currentToy.description}</p>
+                    <div class="product-base-price">Базовая цена: <span>${currentToy.basePrice} руб.</span></div>
+                    
+                    <div class="options-section">
+                        <h3 class="options-title"><i class="fas fa-ruler"></i> Размер игрушки</h3>
+                        <div class="options-group" id="size-options">
+                            ${Object.keys(availableSizes).map(sizeKey => `
+                                <div class="option ${sizeKey === selectedSize ? 'active' : ''}" data-type="size" data-value="${sizeKey}">
+                                    <div class="option-name">${availableSizes[sizeKey].name}</div>
+                                    <div class="option-price">+${Math.round(currentToy.basePrice * (availableSizes[sizeKey].multiplier - 1))} руб.</div>
+                                    <div class="option-description">${availableSizes[sizeKey].description}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="options-section">
+                        <h3 class="options-title"><i class="fas fa-layer-group"></i> Материал наполнителя</h3>
+                        <div class="options-group" id="filling-options">
+                            ${Object.keys(fillingData).map(fillingKey => `
+                                <div class="option ${fillingKey === selectedFilling ? 'active' : ''}" data-type="filling" data-value="${fillingKey}">
+                                    <div class="option-name">${fillingData[fillingKey].name}</div>
+                                    <div class="option-price">+${Math.round(currentToy.basePrice * (fillingData[fillingKey].multiplier - 1))} руб.</div>
+                                    <div class="option-description">${fillingData[fillingKey].description}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="options-section">
+                        <h3 class="options-title"><i class="fas fa-wind"></i> Ароматизация</h3>
+                        <div class="options-group" id="scent-options">
+                            ${Object.keys(scentData).map(scentKey => `
+                                <div class="option ${scentKey === selectedScent ? 'active' : ''}" data-type="scent" data-value="${scentKey}">
+                                    <div class="option-name">${scentData[scentKey].name}</div>
+                                    <div class="option-price">+${scentData[scentKey].price} руб.</div>
+                                    <div class="option-description">${scentData[scentKey].description}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    ${isKeychain ? `
+                    <div class="options-section">
+                        <h3 class="options-title"><i class="fas fa-tag"></i> Бирка для брелка</h3>
+                        <div id="tag-options">
+                            ${Object.keys(tagData).map(tagKey => {
+                                const tag = tagData[tagKey];
+                                const isActive = tagKey === selectedTag;
+                                return `
+                                <div class="personalization-option ${isActive ? 'active' : ''}" data-type="tag" data-value="${tagKey}">
+                                    <div class="personalization-checkbox">
+                                        <input type="checkbox" ${isActive ? 'checked' : ''} id="tag-${tagKey}">
+                                    </div>
+                                    <div class="personalization-content">
+                                        <div class="personalization-header">
+                                            <div class="personalization-name">${tag.name}</div>
+                                            <div class="personalization-price">+${tag.price} руб.</div>
+                                        </div>
+                                        <div class="personalization-description">${tag.description}</div>
+                                        ${tagKey !== 'none' ? `
+                                        <input type="text" class="personalization-input" id="tag-text-input" 
+                                               placeholder="${tag.placeholder}" 
+                                               maxlength="${tag.maxLength}"
+                                               ${isActive ? '' : 'disabled'}
+                                               value="${tagText}">
+                                        ` : ''}
+                                    </div>
+                                </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                    ` : `
+                    <div class="options-section">
+                        <h3 class="options-title"><i class="fas fa-pen"></i> Персонализация</h3>
+                        <div id="personalization-options">
+                            ${Object.keys(personalizationData).map(personalizationKey => {
+                                const personalization = personalizationData[personalizationKey];
+                                const isActive = personalizationKey === 'none' ? Object.keys(selectedPersonalizations).length === 0 : selectedPersonalizations[personalizationKey];
+                                return `
+                                <div class="personalization-option ${isActive ? 'active' : ''}" data-type="personalization" data-value="${personalizationKey}">
+                                    <div class="personalization-checkbox">
+                                        <input type="checkbox" ${isActive ? 'checked' : ''} id="personalization-${personalizationKey}">
+                                    </div>
+                                    <div class="personalization-content">
+                                        <div class="personalization-header">
+                                            <div class="personalization-name">${personalization.name}</div>
+                                            <div class="personalization-price">+${personalization.price} руб.</div>
+                                        </div>
+                                        <div class="personalization-description">${personalization.description}</div>
+                                        ${personalizationKey !== 'none' ? `
+                                        <input type="text" class="personalization-input" id="personalization-text-${personalizationKey}" 
+                                               placeholder="${personalization.placeholder}" 
+                                               maxlength="${personalization.maxLength}"
+                                               ${isActive ? '' : 'disabled'}
+                                               value="${selectedPersonalizations[personalizationKey] || ''}">
+                                        ` : ''}
+                                    </div>
+                                </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                    
+                    <button class="voice-btn ${hasSavedVoice ? 'has-audio' : ''}" id="voice-btn">
+                        <i class="fas fa-music"></i> ${hasSavedVoice ? 'Озвучка добавлена (+300 руб.)' : 'Озвучка в игрушку (+300 руб.)'}
+                    </button>
+                    `}
+                    
+                    <div class="product-summary">
+                        <div class="summary-row">
+                            <span>Базовая цена:</span>
+                            <span>${currentToy.basePrice} руб.</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Размер (${availableSizes[selectedSize].name}):</span>
+                            <span>+${Math.round(currentToy.basePrice * (availableSizes[selectedSize].multiplier - 1))} руб.</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Наполнитель (${fillingData[selectedFilling].name}):</span>
+                            <span>+${Math.round(currentToy.basePrice * (fillingData[selectedFilling].multiplier - 1))} руб.</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Аромат (${scentData[selectedScent].name}):</span>
+                            <span>+${scentData[selectedScent].price} руб.</span>
+                        </div>
+                        ${isKeychain ? `
+                        ${selectedTag !== 'none' ? `
+                        <div class="summary-row">
+                            <span>Бирка (${tagData[selectedTag].name}):</span>
+                            <span>+${tagData[selectedTag].price} руб.</span>
+                        </div>
+                        ` : ''}
+                        ` : `
+                        ${Object.keys(selectedPersonalizations).map(key => `
+                        <div class="summary-row">
+                            <span>${personalizationData[key].name}:</span>
+                            <span>+${personalizationData[key].price} руб.</span>
+                        </div>
+                        `).join('')}
+                        ${hasSavedVoice ? `
+                        <div class="summary-row">
+                            <span>Озвучка:</span>
+                            <span>+${VOICE_PRICE} руб.</span>
+                        </div>
+                        ` : ''}
+                        `}
+                        <div class="final-price">
+                            <span>Итого:</span>
+                            <span id="final-price">${calculateFinalPrice()} руб.</span>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-btn" id="modal-add-to-cart"><i class="fas fa-cart-plus"></i> Добавить в корзину</button>
+                </div>
+            `;
+            
+            // Добавляем обработчики событий для опций
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    const value = this.getAttribute('data-value');
+                    
+                    // Убираем активный класс у всех опций этого типа
+                    document.querySelectorAll(`.option[data-type="${type}"]`).forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс к выбранной опции
+                    this.classList.add('active');
+                    
+                    // Обновляем выбранные значения
+                    if (type === 'size') selectedSize = value;
+                    if (type === 'filling') selectedFilling = value;
+                    if (type === 'scent') selectedScent = value;
+                    
+                    // Обновляем итоговую цену
+                    updateFinalPrice();
+                });
+            });
+            
+            if (isKeychain) {
+                // Для брелков добавляем обработчики для бирок
+                document.querySelectorAll('.personalization-option[data-type="tag"]').forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        if (e.target.type === 'checkbox' || e.target.classList.contains('personalization-input')) {
+                            return;
+                        }
+                        
+                        const tagKey = this.getAttribute('data-value');
+                        const checkbox = this.querySelector('input[type="checkbox"]');
+                        
+                        // Убираем активный класс у всех бирок
+                        document.querySelectorAll('.personalization-option[data-type="tag"]').forEach(opt => {
+                            opt.classList.remove('active');
+                            const otherCheckbox = opt.querySelector('input[type="checkbox"]');
+                            otherCheckbox.checked = false;
+                        });
+                        
+                        // Добавляем активный класс к выбранной бирке
+                        checkbox.checked = true;
+                        this.classList.add('active');
+                        selectedTag = tagKey;
+                        
+                        // Включаем/выключаем поле ввода
+                        const tagInput = document.getElementById('tag-text-input');
+                        if (tagInput) {
+                            if (tagKey === 'none') {
+                                tagInput.disabled = true;
+                                tagText = '';
+                            } else {
+                                tagInput.disabled = false;
+                                tagInput.focus();
+                                tagInput.placeholder = tagData[tagKey].placeholder;
+                                tagInput.maxLength = tagData[tagKey].maxLength;
+                            }
+                        }
+                        
+                        updateFinalPrice();
+                    });
+                });
+                
+                // Добавляем обработчики для чекбоксов бирок
+                document.querySelectorAll('.personalization-option[data-type="tag"] input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.addEventListener('change', function(e) {
+                        e.stopPropagation();
+                        const option = this.closest('.personalization-option');
+                        const tagKey = option.getAttribute('data-value');
+                        
+                        // Убираем активный класс у всех бирок
+                        document.querySelectorAll('.personalization-option[data-type="tag"]').forEach(opt => {
+                            opt.classList.remove('active');
+                            const otherCheckbox = opt.querySelector('input[type="checkbox"]');
+                            otherCheckbox.checked = false;
+                        });
+                        
+                        // Добавляем активный класс к выбранной бирке
+                        if (this.checked) {
+                            option.classList.add('active');
+                            selectedTag = tagKey;
+                            
+                            // Включаем/выключаем поле ввода
+                            const tagInput = document.getElementById('tag-text-input');
+                            if (tagInput) {
+                                if (tagKey === 'none') {
+                                    tagInput.disabled = true;
+                                    tagText = '';
+                                } else {
+                                    tagInput.disabled = false;
+                                    tagInput.focus();
+                                    tagInput.placeholder = tagData[tagKey].placeholder;
+                                    tagInput.maxLength = tagData[tagKey].maxLength;
+                                }
+                            }
+                        } else {
+                            selectedTag = "none";
+                        }
+                        
+                        updateFinalPrice();
+                    });
+                });
+                
+                // Добавляем обработчик для поля ввода бирки
+                const tagInput = document.getElementById('tag-text-input');
+                if (tagInput) {
+                    tagInput.addEventListener('input', function() {
+                        tagText = this.value;
+                        updateFinalPrice();
+                    });
+                }
+            } else {
+                // Для обычных игрушек добавляем обработчики для персонализации
+                document.querySelectorAll('.personalization-option[data-type="personalization"]').forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        if (e.target.type === 'checkbox' || e.target.classList.contains('personalization-input')) {
+                            return;
+                        }
+                        
+                        const personalizationKey = this.getAttribute('data-value');
+                        const checkbox = this.querySelector('input[type="checkbox"]');
+                        
+                        if (personalizationKey === 'none') {
+                            // Если выбрана опция "Без персонализации", сбрасываем все остальные
+                            document.querySelectorAll('.personalization-option[data-type="personalization"]').forEach(opt => {
+                                const key = opt.getAttribute('data-value');
+                                if (key !== 'none') {
+                                    const otherCheckbox = opt.querySelector('input[type="checkbox"]');
+                                    otherCheckbox.checked = false;
+                                    opt.classList.remove('active');
+                                    const input = document.getElementById(`personalization-text-${key}`);
+                                    if (input) {
+                                        input.disabled = true;
+                                        input.value = '';
+                                    }
+                                    delete selectedPersonalizations[key];
+                                }
+                            });
+                            checkbox.checked = true;
+                            this.classList.add('active');
+                        } else {
+                            // Для других опций персонализации
+                            const noneOption = document.querySelector('.personalization-option[data-value="none"]');
+                            const noneCheckbox = noneOption.querySelector('input[type="checkbox"]');
+                            noneCheckbox.checked = false;
+                            noneOption.classList.remove('active');
+                            
+                            checkbox.checked = !checkbox.checked;
+                            
+                            if (checkbox.checked) {
+                                this.classList.add('active');
+                                const input = document.getElementById(`personalization-text-${personalizationKey}`);
+                                if (input) {
+                                    input.disabled = false;
+                                    input.focus();
+                                }
+                                selectedPersonalizations[personalizationKey] = '';
+                            } else {
+                                this.classList.remove('active');
+                                const input = document.getElementById(`personalization-text-${personalizationKey}`);
+                                if (input) {
+                                    input.disabled = true;
+                                    input.value = '';
+                                }
+                                delete selectedPersonalizations[personalizationKey];
+                            }
+                        }
+                        
+                        updateFinalPrice();
+                    });
+                });
+                
+                // Добавляем обработчики для чекбоксов персонализации
+                document.querySelectorAll('.personalization-option[data-type="personalization"] input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.addEventListener('change', function(e) {
+                        e.stopPropagation();
+                        const option = this.closest('.personalization-option');
+                        const personalizationKey = option.getAttribute('data-value');
+                        
+                        if (personalizationKey === 'none') {
+                            if (this.checked) {
+                                // Сбрасываем все другие персонализации
+                                document.querySelectorAll('.personalization-option[data-type="personalization"]').forEach(opt => {
+                                    const key = opt.getAttribute('data-value');
+                                    if (key !== 'none') {
+                                        const otherCheckbox = opt.querySelector('input[type="checkbox"]');
+                                        otherCheckbox.checked = false;
+                                        opt.classList.remove('active');
+                                        const input = document.getElementById(`personalization-text-${key}`);
+                                        if (input) {
+                                            input.disabled = true;
+                                            input.value = '';
+                                        }
+                                        delete selectedPersonalizations[key];
+                                    }
+                                });
+                                option.classList.add('active');
+                            } else {
+                                option.classList.remove('active');
+                            }
+                        } else {
+                            if (this.checked) {
+                                // Снимаем выбор с "Без персонализации"
+                                const noneOption = document.querySelector('.personalization-option[data-value="none"]');
+                                const noneCheckbox = noneOption.querySelector('input[type="checkbox"]');
+                                noneCheckbox.checked = false;
+                                noneOption.classList.remove('active');
+                                
+                                option.classList.add('active');
+                                const input = document.getElementById(`personalization-text-${personalizationKey}`);
+                                if (input) {
+                                    input.disabled = false;
+                                    input.focus();
+                                }
+                                selectedPersonalizations[personalizationKey] = '';
+                            } else {
+                                option.classList.remove('active');
+                                const input = document.getElementById(`personalization-text-${personalizationKey}`);
+                                if (input) {
+                                    input.disabled = true;
+                                    input.value = '';
+                                }
+                                delete selectedPersonalizations[personalizationKey];
+                            }
+                        }
+                        
+                        updateFinalPrice();
+                    });
+                });
+                
+                // Добавляем обработчики для полей ввода персонализации
+                document.querySelectorAll('.personalization-input').forEach(input => {
+                    input.addEventListener('input', function() {
+                        const personalizationKey = this.id.replace('personalization-text-', '');
+                        selectedPersonalizations[personalizationKey] = this.value;
+                        updateFinalPrice();
+                    });
+                });
+                
+                // Добавляем обработчик для кнопки озвучки
+                document.getElementById('voice-btn').addEventListener('click', openVoiceModal);
+            }
+            
+            // Добавляем обработчик для кнопки добавления в корзину
+            document.getElementById('modal-add-to-cart').addEventListener('click', addToCartFromModal);
+            
+            // Показываем модальное окно с анимацией
+            const modal = document.getElementById('product-modal');
+            modal.style.display = 'block';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        // Функция для открытия модального окна озвучки
+        function openVoiceModal() {
+            // Загружаем сохраненную озвучку, если есть
+            const savedVoice = toyVoices[currentToy.id];
+            if (savedVoice) {
+                currentAudioBlob = savedVoice;
+                const audioPlayer = document.getElementById('audio-player');
+                audioPlayer.src = URL.createObjectURL(savedVoice);
+                document.getElementById('audio-preview').style.display = 'block';
+            }
+            
+            // Показываем модальное окно с анимацией
+            const voiceModal = document.getElementById('voice-modal');
+            voiceModal.style.display = 'block';
+            setTimeout(() => {
+                voiceModal.classList.add('show');
+            }, 10);
+        }
+
+        // Функция для сброса модального окна озвучки
+        function resetVoiceModal() {
+            document.getElementById('audio-file').value = '';
+            document.getElementById('audio-preview').style.display = 'none';
+            document.getElementById('record-btn').style.display = 'inline-block';
+            document.getElementById('stop-btn').style.display = 'none';
+            currentAudioBlob = null;
+            audioChunks = [];
+        }
+
+        // Функция для расчета итоговой цены
+        function calculateFinalPrice() {
+            if (!currentToy) return 0;
+            
+            const isKeychain = currentToy.id.startsWith('keychain');
+            const availableSizes = getAvailableSizes(currentToy.id);
+            const sizeMultiplier = availableSizes[selectedSize].multiplier;
+            const fillingMultiplier = fillingData[selectedFilling].multiplier;
+            const scentPrice = scentData[selectedScent].price;
+            
+            let additionalPrice = 0;
+            
+            if (isKeychain) {
+                // Для брелков добавляем стоимость бирки
+                if (selectedTag !== 'none') {
+                    additionalPrice += tagData[selectedTag].price;
+                }
+            } else {
+                // Для обычных игрушек добавляем стоимость персонализаций и озвучки
+                Object.keys(selectedPersonalizations).forEach(key => {
+                    additionalPrice += personalizationData[key].price;
+                });
+                
+                const voicePrice = toyVoices[currentToy.id] ? VOICE_PRICE : 0;
+                additionalPrice += voicePrice;
+            }
+            
+            return Math.round((currentToy.basePrice * sizeMultiplier * fillingMultiplier) + scentPrice + additionalPrice);
+        }
+
+        // Функция для обновления итоговой цены
+        function updateFinalPrice() {
+            const finalPriceElement = document.getElementById('final-price');
+            if (finalPriceElement) {
+                finalPriceElement.textContent = `${calculateFinalPrice()} руб.`;
+                
+                // Обновляем информацию в сводке
+                const isKeychain = currentToy.id.startsWith('keychain');
+                const availableSizes = getAvailableSizes(currentToy.id);
+                const summaryRows = document.querySelectorAll('.summary-row');
+                const hasVoice = !isKeychain && toyVoices[currentToy.id];
+                const personalizationCount = Object.keys(selectedPersonalizations).length;
+                
+                if (summaryRows.length >= 4) {
+                    summaryRows[1].querySelector('span:first-child').textContent = `Размер (${availableSizes[selectedSize].name}):`;
+                    summaryRows[1].querySelector('span:last-child').textContent = `+${Math.round(currentToy.basePrice * (availableSizes[selectedSize].multiplier - 1))} руб.`;
+                    
+                    summaryRows[2].querySelector('span:first-child').textContent = `Наполнитель (${fillingData[selectedFilling].name}):`;
+                    summaryRows[2].querySelector('span:last-child').textContent = `+${Math.round(currentToy.basePrice * (fillingData[selectedFilling].multiplier - 1))} руб.`;
+                    
+                    summaryRows[3].querySelector('span:first-child').textContent = `Аромат (${scentData[selectedScent].name}):`;
+                    summaryRows[3].querySelector('span:last-child').textContent = `+${scentData[selectedScent].price} руб.`;
+                    
+                    if (isKeychain) {
+                        // Для брелков обновляем строку с биркой
+                        if (selectedTag !== 'none') {
+                            if (summaryRows.length > 4) {
+                                summaryRows[4].querySelector('span:first-child').textContent = `Бирка (${tagData[selectedTag].name}):`;
+                                summaryRows[4].querySelector('span:last-child').textContent = `+${tagData[selectedTag].price} руб.`;
+                            }
+                        }
+                    } else {
+                        // Для обычных игрушек обновляем строки с персонализацией и озвучкой
+                        const personalizationRows = document.querySelectorAll('.summary-row.personalization-row');
+                        personalizationRows.forEach(row => row.remove());
+                        
+                        let currentIndex = 4;
+                        Object.keys(selectedPersonalizations).forEach(key => {
+                            const row = document.createElement('div');
+                            row.className = 'summary-row personalization-row';
+                            row.innerHTML = `
+                                <span>${personalizationData[key].name}:</span>
+                                <span>+${personalizationData[key].price} руб.</span>
+                            `;
+                            summaryRows[3].parentNode.insertBefore(row, summaryRows[3].nextSibling);
+                            currentIndex++;
+                        });
+                        
+                        // Обновляем строку с озвучкой
+                        if (hasVoice) {
+                            const voiceIndex = 4 + personalizationCount;
+                            if (summaryRows.length > voiceIndex) {
+                                summaryRows[voiceIndex].querySelector('span:first-child').textContent = `Озвучка:`;
+                                summaryRows[voiceIndex].querySelector('span:last-child').textContent = `+${VOICE_PRICE} руб.`;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Функция для добавления игрушки в корзину из модального окна
+        function addToCartFromModal() {
+            if (!currentToy) return;
+            
+            const isKeychain = currentToy.id.startsWith('keychain');
+            
+            // Проверяем персонализацию или бирку
+            let customizationValid = true;
+            const customizationDetails = {};
+            
+            if (isKeychain) {
+                // Для брелков проверяем бирку
+                if (selectedTag !== 'none') {
+                    if (!tagText.trim()) {
+                        customizationValid = false;
+                        showNotification(`Пожалуйста, введите текст для "${tagData[selectedTag].name}"`, true);
+                        return;
+                    }
+                    customizationDetails.tag = {
+                        type: tagData[selectedTag].name,
+                        text: tagText,
+                        price: tagData[selectedTag].price
+                    };
+                }
+            } else {
+                // Для обычных игрушек проверяем персонализацию
+                Object.keys(selectedPersonalizations).forEach(key => {
+                    if (key !== 'none') {
+                        const input = document.getElementById(`personalization-text-${key}`);
+                        if (input && !input.value.trim()) {
+                            customizationValid = false;
+                            showNotification(`Пожалуйста, введите текст для "${personalizationData[key].name}"`, true);
+                            return;
+                        }
+                        customizationDetails[key] = {
+                            type: personalizationData[key].name,
+                            text: input ? input.value : '',
+                            price: personalizationData[key].price
+                        };
+                    }
+                });
+            }
+            
+            if (!customizationValid) return;
+            
+            // Создаем объект игрушки для корзины
+            const availableSizes = getAvailableSizes(currentToy.id);
+            const toyForCart = {
+                id: currentToy.id,
+                category: getCategoryName(currentToy.id),
+                name: currentToy.name,
+                size: availableSizes[selectedSize].name,
+                filling: fillingData[selectedFilling].name,
+                scent: scentData[selectedScent].name,
+                price: calculateFinalPrice(),
+                image: currentToy.image,
+                description: currentToy.description,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Добавляем информацию о персонализации или бирке
+            if (Object.keys(customizationDetails).length > 0) {
+                if (isKeychain) {
+                    toyForCart.tag = customizationDetails.tag;
+                } else {
+                    toyForCart.personalization = customizationDetails;
+                }
+            }
+            
+            // Добавляем информацию об озвучке, если она есть (только для не-брелоков)
+            if (!isKeychain && toyVoices[currentToy.id]) {
+                toyForCart.hasVoice = true;
+                toyForCart.voicePrice = VOICE_PRICE;
+                // Удаляем озвучку из временного хранилища после добавления в корзину
+                delete toyVoices[currentToy.id];
+                sessionStorage.setItem('toyVoices', JSON.stringify(toyVoices));
+            }
+            
+            // Получаем существующие игрушки из localStorage
+            const savedToys = JSON.parse(localStorage.getItem('savedToys')) || [];
+            
+            // Добавляем новую игрушку
+            savedToys.push(toyForCart);
+            
+            // Сохраняем обратно в localStorage
+            localStorage.setItem('savedToys', JSON.stringify(savedToys));
+            
+            // Обновляем счетчик корзины
+            updateCartCount();
+            
+            // Закрываем модальное окно
+            closeProductModal();
+            
+            // Показываем уведомление
+            const customizationText = Object.keys(customizationDetails).length > 0 ? 
+                (isKeychain ? ' С биркой!' : ' С персонализацией!') : '';
+            const voiceText = !isKeychain && toyForCart.hasVoice ? ' С озвучкой!' : '';
+            showNotification('Игрушка добавлена в корзину!' + voiceText + customizationText);
+        }
+
+        // Функция для получения названия категории по ID игрушки
+        function getCategoryName(toyId) {
+            for (const categoryKey in toyData) {
+                for (const toy of toyData[categoryKey].toys) {
+                    if (toy.id === toyId) {
+                        return toyData[categoryKey].name;
+                    }
+                }
+            }
+            return "Другое";
+        }
+
+        // Функция для закрытия модального окна
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Функция для закрытия модального окна озвучки
+        function closeVoiceModal() {
+            const voiceModal = document.getElementById('voice-modal');
+            voiceModal.classList.remove('show');
+            setTimeout(() => {
+                voiceModal.style.display = 'none';
+                resetVoiceModal();
+            }, 300);
+        }
+
+        // Функция для показа уведомления
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            
+            if (isError) {
+                notification.classList.add('error');
+            } else {
+                notification.classList.remove('error');
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Инициализация страницы
+        function initPage() {
+            // Загружаем все игрушки по умолчанию
+            loadToys();
+            updateCartCount();
+            updateFavoritesCount();
+            
+            // Добавляем обработчики событий для кнопок категорий
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Убираем активный класс у всех кнопок
+                    document.querySelectorAll('.category-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Добавляем активный класс к выбранной кнопке
+                    this.classList.add('active');
+                    
+                    // Загружаем игрушки выбранной категории
+                    const category = this.getAttribute('data-category');
+                    loadToys(category);
+                });
+            });
+            
+            // Добавляем обработчик для закрытия модального окна
+            document.getElementById('close-modal').addEventListener('click', closeProductModal);
+            
+            // Добавляем обработчик для закрытия модального окна озвучки
+            document.getElementById('voice-close-modal').addEventListener('click', closeVoiceModal);
+            
+            // Закрываем модальные окна при клике вне их
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('product-modal');
+                const voiceModal = document.getElementById('voice-modal');
+                if (event.target === modal) {
+                    closeProductModal();
+                }
+                if (event.target === voiceModal) {
+                    closeVoiceModal();
+                }
+            });
+
+            // Инициализация функционала записи голоса
+            initVoiceRecording();
+            
+            // Инициализация кнопки "Наверх"
+            initScrollToTop();
+            
+            // Инициализация эффекта прокрутки для заголовка
+            initScrollHeader();
+        }
+
+        // Инициализация записи голоса
+        function initVoiceRecording() {
+            const recordBtn = document.getElementById('record-btn');
+            const stopBtn = document.getElementById('stop-btn');
+            const audioFileInput = document.getElementById('audio-file');
+            const playPreviewBtn = document.getElementById('play-preview');
+            const deleteAudioBtn = document.getElementById('delete-audio');
+            const saveVoiceBtn = document.getElementById('save-voice');
+            const audioPlayer = document.getElementById('audio-player');
+
+            // Обработчик для загрузки файла
+            audioFileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const url = URL.createObjectURL(file);
+                    audioPlayer.src = url;
+                    document.getElementById('audio-preview').style.display = 'block';
+                    currentAudioBlob = file;
+                }
+            });
+
+            // Обработчик для кнопки записи
+            recordBtn.addEventListener('click', async function() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.ondataavailable = function(event) {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = function() {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        audioPlayer.src = audioUrl;
+                        document.getElementById('audio-preview').style.display = 'block';
+                        currentAudioBlob = audioBlob;
+                        
+                        // Останавливаем все треки
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+
+                    mediaRecorder.start();
+                    recordBtn.style.display = 'none';
+                    stopBtn.style.display = 'inline-block';
+                } catch (err) {
+                    showNotification('Ошибка доступа к микрофону: ' + err.message, true);
+                }
+            });
+
+            // Обработчик для кнопки остановки записи
+            stopBtn.addEventListener('click', function() {
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    mediaRecorder.stop();
+                    recordBtn.style.display = 'inline-block';
+                    stopBtn.style.display = 'none';
+                }
+            });
+
+            // Обработчик для кнопки воспроизведения
+            playPreviewBtn.addEventListener('click', function() {
+                audioPlayer.play();
+            });
+
+            // Обработчик для кнопки удаления аудио
+            deleteAudioBtn.addEventListener('click', function() {
+                resetVoiceModal();
+                // Удаляем сохраненную озвучку
+                if (currentToy && toyVoices[currentToy.id]) {
+                    delete toyVoices[currentToy.id];
+                    sessionStorage.setItem('toyVoices', JSON.stringify(toyVoices));
+                    // Обновляем кнопку и цену
+                    const voiceBtn = document.getElementById('voice-btn');
+                    voiceBtn.textContent = 'Озвучка в игрушку (+300 руб.)';
+                    voiceBtn.classList.remove('has-audio');
+                    updateFinalPrice();
+                }
+            });
+
+            // Обработчик для кнопки сохранения озвучки
+            saveVoiceBtn.addEventListener('click', function() {
+                if (currentAudioBlob && currentToy) {
+                    // Сохраняем озвучку в sessionStorage
+                    toyVoices[currentToy.id] = currentAudioBlob;
+                    sessionStorage.setItem('toyVoices', JSON.stringify(toyVoices));
+                    
+                    showNotification('Озвучка успешно сохранена для этой игрушки! +300 руб. к стоимости');
+                    closeVoiceModal();
+                    
+                    // Обновляем кнопку озвучки в модальном окне товара
+                    const voiceBtn = document.getElementById('voice-btn');
+                    voiceBtn.innerHTML = '<i class="fas fa-music"></i> Озвучка добавлена (+300 руб.)';
+                    voiceBtn.classList.add('has-audio');
+                    
+                    // Обновляем итоговую цену
+                    updateFinalPrice();
+                } else {
+                    showNotification('Пожалуйста, загрузите или запишите аудио перед сохранением.', true);
+                }
+            });
+        }
+
+        // Инициализация кнопки "Наверх"
+        function initScrollToTop() {
+            const scrollButton = document.getElementById('scroll-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollButton.classList.add('show');
+                } else {
+                    scrollButton.classList.remove('show');
+                }
+            });
+            
+            scrollButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Инициализация эффекта прокрутки для заголовка
+        function initScrollHeader() {
+            const header = document.getElementById('header');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+        }
+
+        // Инициализация при загрузке страницы
+        window.onload = initPage;
+    </script>
+</body>
+</html>
