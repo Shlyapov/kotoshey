@@ -53,58 +53,58 @@
             justify-content: space-between;
             align-items: center;
         }
-        
-        .logo {
-            font-size: 36px;
-            font-weight: 800;
-            display: flex;
+
+	.logo-cont {
+
+		filter: drop-shadow(3px 3px 6px rgba(244, 143, 177, 0.3));
+	}
+
+        .logo-img {
+		
+   		height: 75px;
+    		width: auto;
+    		transition: all 0.3s ease;
+	}
+
+	.logo-img:hover {
+		transform: scale(1.05);
+		width: auto;
             align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: -1px;
             transition: all 0.3s ease;
             position: relative;
-            background: linear-gradient(135deg, #5d4037 0%, #f48fb1 50%, #5d4037 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 2px 2px 4px rgba(93, 64, 55, 0.1);
-            padding: 5px 0;
-        }
+
+	}
+	
+	
+
         
-        .logo::before {
+        .logo-img::before {
             content: '';
             position: absolute;
             bottom: -2px;
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, transparent, #f48fb1, transparent);
             border-radius: 3px;
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
         
-        .logo:hover {
-            transform: scale(1.05);
-            text-shadow: 3px 3px 6px rgba(93, 64, 55, 0.15);
+        
+        .logo-img:hover::before {
+            transform: scaleX(1.1);
         }
         
-        .logo:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .logo span {
-            background: linear-gradient(135deg, #f48fb1 0%, #f06292 100%);
+        .logo-img span {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             position: relative;
         }
         
-        .logo span::after {
-            content: '🐾';
+        .logo-img span::after {
+            content: '';
             position: absolute;
-            top: -5px;
             right: -25px;
             font-size: 20px;
             opacity: 0.8;
@@ -199,15 +199,15 @@
         }
         
         .hero {
-            padding: 180px 0 80px;
-            text-align: center;
-            background: url('https://mainImages.unsplash.com/photo-1534452203293-494d7ddbf7e0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            color: white;
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
+    padding: 180px 0 80px;
+    text-align: center;
+    background: url('images/frontpage2.jpeg') no-repeat center center/cover;
+    color: white;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
         
         .hero::before {
             content: '';
@@ -1280,7 +1280,9 @@
     <header id="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">КотоШей</div>
+		<div class="logo-cont">
+                	<img src="images/kotoshey.svg" alt="логотип" class="logo-img">
+		</div>
                 <nav>
                     <ul>
                         <li><a href="index.html" class="nav-btn">Главная</a></li>
@@ -1500,7 +1502,7 @@
                     <a href="products.html" class="btn">Перейти к товарам</a>
                 </div>
                 <div class="about-image" id="aboutImage">
-                    <img src="https://wallpapers.com/mainImages/hd/cute-love-plushie-toys-yrs5uc7r3uq2ntl5.jpg" alt="О нашем магазине">
+                    <img src="images/о нашем магазине.png" alt="О нашем магазине">
                 </div>
             </div>
         </div>
