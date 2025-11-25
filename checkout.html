@@ -385,6 +385,7 @@
             transform: translateY(10px);
             animation: fadeInUp 0.5s ease forwards;
             position: relative;
+            z-index: 1003;
         }
         
         .form-group:nth-child(1) { animation-delay: 0.5s; }
@@ -460,8 +461,8 @@
         }
         
         .city-search-results {
-            position: absolute;
-            top: 100%;
+            position: relative;
+            top: 50%;
             left: 0;
             right: 0;
             background: white;
@@ -469,10 +470,10 @@
             border-radius: 8px;
             max-height: 200px;
             overflow-y: auto;
-            z-index: 1002;
             box-shadow: 0 5px 15px rgba(188, 170, 164, 0.2);
             display: none;
             margin-top: 5px;
+            z-index: 1003;
         }
         
         .city-search-result {
@@ -480,6 +481,7 @@
             cursor: pointer;
             transition: all 0.3s;
             border-bottom: 1px solid #f5f0eb;
+            z-index: 1003;
         }
         
         .city-search-result:hover {
@@ -502,14 +504,14 @@
         }
         
         .address-field {
-            position: relative;
-            z-index: 1;
+            /*position: relative;*/
+            /*z-index: -1;*/
         }
         
         /* Стили для сообщения "Город не найден" */
         .city-not-found {
-            position: absolute;
-            top: 100%;
+            position: relative;
+            top: 50%;
             left: 0;
             right: 0;
             background: white;
