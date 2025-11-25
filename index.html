@@ -56,19 +56,39 @@
 
 	.logo-cont {
 
-		filter: drop-shadow(3px 3px 6px rgba(244, 143, 177, 0.3));
+		filter: drop-shadow(3px 3px 6px rgba(244,143,177,0.4));
+		position: relative;
+		display: inline-block;
+		width: 316px; /* Фиксированная ширина контейнера */
+   		height: 75px; /* Фиксированная высота контейнера */
+	}
+	.logo-cont::after {
+    		content: '';
+    		position: absolute;
+		bottom: -5px; /* Вне контейнера, но появляется только при hover */
+    		left: 0;
+    		width: 100%;
+    		height: 3px;
+    		background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+    		border-radius: 3px;
+    		transform: scaleX(0);
+    		transition: transform 0.3s ease;
+		}
+	.logo-cont:hover::after {
+    		transform: scaleX(1);
 	}
 
         .logo-img {
-		
-   		height: 75px;
-    		width: auto;
+    		width: 100%; /* Растягиваем на всю ширину контейнера */
+    		height: 100%; /* Растягиваем на всю высоту контейнера */
+    		object-fit: contain;
     		transition: all 0.3s ease;
 	}
 
 	.logo-img:hover {
 		transform: scale(1.05);
-		width: auto;
+		width: 100%;
+		height: 100%;
             align-items: center;
             transition: all 0.3s ease;
             position: relative;
@@ -81,7 +101,7 @@
         .logo-img::before {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 3px;

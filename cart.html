@@ -54,43 +54,81 @@
             align-items: center;
         }
         
-        .logo {
-            font-size: 36px;
-            font-weight: 800;
-            display: flex;
+	.logo-cont {
+
+		filter: drop-shadow(3px 3px 6px rgba(244,143,177,0.4));
+		position: relative;
+		display: inline-block;
+		width: 316px; /* Фиксированная ширина контейнера */
+   		height: 75px; /* Фиксированная высота контейнера */
+	}
+	.logo-cont::after {
+    		content: '';
+    		position: absolute;
+		bottom: -5px; /* Вне контейнера, но появляется только при hover */
+    		left: 0;
+    		width: 100%;
+    		height: 3px;
+    		background: linear-gradient(90deg, transparent, #f48fb1, transparent);
+    		border-radius: 3px;
+    		transform: scaleX(0);
+    		transition: transform 0.3s ease;
+		}
+	.logo-cont:hover::after {
+    		transform: scaleX(1);
+	}
+
+        .logo-img {
+    		width: 100%; /* Растягиваем на всю ширину контейнера */
+    		height: 100%; /* Растягиваем на всю высоту контейнера */
+    		object-fit: contain;
+    		transition: all 0.3s ease;
+	}
+
+	.logo-img:hover {
+		transform: scale(1.05);
+		width: 100%;
+		height: 100%;
             align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: -1px;
             transition: all 0.3s ease;
             position: relative;
-            background: linear-gradient(135deg, #5d4037 0%, #f48fb1 50%, #5d4037 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 2px 2px 4px rgba(93, 64, 55, 0.1);
-            padding: 5px 0;
-        }
+
+	}
+	
+	
+
         
-        .logo::before {
+        .logo-img::before {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, transparent, #f48fb1, transparent);
             border-radius: 3px;
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
         
-        .logo:hover {
-            transform: scale(1.05);
-            text-shadow: 3px 3px 6px rgba(93, 64, 55, 0.15);
+        
+        .logo-img:hover::before {
+            transform: scaleX(1.1);
         }
         
-        .logo:hover::before {
-            transform: scaleX(1);
+        .logo-img span {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .logo-img span::after {
+            content: '';
+            position: absolute;
+            right: -25px;
+            font-size: 20px;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
         }
         
         nav ul {
@@ -698,7 +736,9 @@
     <header id="header">
         <div class="container">
             <div class="header-content">
-                <div class="logo">КотоШей</div>
+                <div class="logo-cont">
+                	<img src="images/kotoshey.svg" alt="логотип" class="logo-img">
+		</div>
                 <nav>
                     <ul>
                         <li><a href="index.html" class="home-btn"><i class="fas fa-home"></i> Главная</a></li>
